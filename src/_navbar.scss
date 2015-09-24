@@ -26,12 +26,12 @@
   text-decoration: none;
   text-transform: uppercase
 }
-.navbar-mobile-toggle {
+.navbar-mobile-toggle,
+.navbar-mobile-close {
   background: $navbar-color-dark;
   border-radius: 6px;
   border: 2px solid $navbar-color-dark;
   color: $navbar-color-lighter;
-  display: block;
   height: $navbar-height / 2.5;
   line-height: 1;
   padding: 6px;
@@ -40,6 +40,20 @@
   right: $col-gutter / 2;
   top: $navbar-height / 7.5;
   
+  &:hover {
+    background: none;
+  }
+}
+.navbar-mobile-toggle {
+  display: block;
+
+  &:hover {   
+    &:after {
+      background: $navbar-color-light;
+      box-shadow: 0 6px 0 0 $navbar-color-light, 0 12px 0 $navbar-color-light;
+    }
+  }
+
   &:after {
     background: $navbar-color-lighter;
     box-shadow: 0 6px 0 0 $navbar-color-lighter, 0 12px 0 $navbar-color-lighter;
@@ -50,14 +64,22 @@
     transition: all .3s;
     width: $col-gutter / 2
   }
+}
+.navbar-mobile-close {
+  display: none;
+  font-size: 20px;
+  padding: 3px 6px;
+  text-decoration: none;
 
-  &:hover {
-    background: none;
-    
-    &:after {
-      background: $navbar-color-light;
-      box-shadow: 0 6px 0 0 $navbar-color-light, 0 12px 0 $navbar-color-light;
-    }
+  &:after {
+    content: 'x';
+    display: block;
+    height: 3px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    transition: all .3s;
+    width: $col-gutter / 2
   }
 }
 .navbar-links,
@@ -76,6 +98,18 @@
 
   &:target {
     display: block;
+
+    & + .navbar-mobile-toggle {
+      display: none;
+
+      &:after {
+        display: none
+      }
+    }
+
+    & ~ .navbar-mobile-close {
+      display: block
+    } 
   }
 }
 .navbar-dropdown {
@@ -91,7 +125,20 @@
     .navbar-dropdown {
       display: block;
     }
+
+    & + .navbar-mobile-toggle {
+      display: none;
+
+      &:after {
+        display: none
+      }
+    }
+
+    & ~ .navbar-mobile-close {
+      display: block
+    }
   }
+
 }
 .navbar-link,
 .navbar-featured-link,
@@ -125,7 +172,8 @@
   .navbar {
     line-height: $navbar-height;
   }
-  .navbar-mobile-toggle {
+  .navbar-mobile-toggle,
+  .navbar-mobile-close {
     display: none
   }
   .navbar-container {
@@ -152,6 +200,9 @@
   .navbar-dropdown-link,
   .navbar-dropdown-toggle {
     height: $navbar-height;
+  }
+  .navbar-dropdown-toggle-target:target + .navbar-links ~ .navbar-mobile-close {
+    display: none
   }
   .navbar-featured-link {
     background: $navbar-color-darker;
