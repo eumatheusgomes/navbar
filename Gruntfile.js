@@ -13,8 +13,8 @@ module.exports = function(grunt) {
         tasks: ['sass'],
         options: {livereload: true}
       },
-      html: {
-        files: ['example/*.html'],
+      phtml: {
+        files: ['example/*.phtml'],
         options: {livereload: true}
       },
     },
